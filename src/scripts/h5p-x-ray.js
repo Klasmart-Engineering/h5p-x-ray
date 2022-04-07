@@ -18,6 +18,7 @@ export default class XRay extends H5P.Question {
         imageAlignment: 'center',
         xRayLensWidth: '20%',
         xRayLensHeight: '25%',
+        xRayLensOffset: '100',
         darkenImageOnXRay: true
       },
       behaviour: {
@@ -543,10 +544,12 @@ export default class XRay extends H5P.Question {
     this.activateXRay();
 
     const lensRect = this.wrapperLens.getBoundingClientRect();
+    const offset = -lensRect.height * parseInt(this.params.visual.xRayLensOffset) / 100;
+
     this.setLensPosition(
       {
         x: event.touches[0].pageX,
-        y: event.touches[0].pageY - lensRect.height
+        y: event.touches[0].pageY + offset
       }
     );
   }
@@ -561,10 +564,12 @@ export default class XRay extends H5P.Question {
     }
 
     const lensRect = this.wrapperLens.getBoundingClientRect();
+    const offset = -lensRect.height * parseInt(this.params.visual.xRayLensOffset) / 100;
+
     this.setLensPosition(
       {
         x: event.touches[0].pageX,
-        y: event.touches[0].pageY - lensRect.height
+        y: event.touches[0].pageY + offset
       }
     );
   }
